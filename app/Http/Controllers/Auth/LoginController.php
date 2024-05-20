@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        return auth()->user() ? redirect()->route('dashboard') : view('auth.login');
     }
 
     public function login(LoginRequest $request)
@@ -17,12 +17,12 @@ class LoginController extends Controller
         if (!auth()->attempt($request->validated())) {
             return back();
         }
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Login successful');
     }
 
     public function logout()
     {
         auth()->logout();
-        return redirect('login');
+        return redirect('login')->with('success', 'Logout successful');
     }
 }
