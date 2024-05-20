@@ -20,3 +20,5 @@
 <![endif]-->
 
 <script src="{{ asset('assets/js/modernizr.min.js') }}"></script>
+
+@stack('style')

@@ -52,7 +52,7 @@
 
                         <div class="row m-t-50">
                             <div class="col-sm-12 text-center">
-                                <p class="text-muted">Don't have an account? <a href="page-register.html"
+                                <p class="text-muted">Don't have an account? <a href="{{ route('register.index') }}"
                                         class="text-primary m-l-5"><b>Sign Up</b></a></p>
                             </div>
                         </div>

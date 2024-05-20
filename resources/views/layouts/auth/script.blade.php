@@ -40,3 +40,5 @@
 
 @include('layouts.partials.session-message')
 @include('layouts.partials.validation')
+
+@stack('script')
