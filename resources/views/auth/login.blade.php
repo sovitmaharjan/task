@@ -23,14 +23,14 @@
                                     <div class="form-group ">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="text" id="email" name="email"
-                                                value="zxcvzxcv" placeholder="Email">
+                                                value="admin@admin.com" placeholder="Email">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="password" id="password" name="password"
-                                                value="" placeholder="Password">
+                                                value="P@ssw0rd" placeholder="Password">
                                         </div>
                                     </div>
 
