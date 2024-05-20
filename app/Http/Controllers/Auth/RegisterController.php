@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Services\UserService;
 
 class RegisterController extends Controller
 {
@@ -14,7 +15,9 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        dd($request->all());
+        $userInstance = new UserService();
+        $user = $userInstance->create($request->validated());
+        dd($user);
         // User::create($request->validated());
         return redirect()->route('login')->with('success', 'User created successfully');
     }

@@ -27,21 +27,21 @@
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="text" id="first_name" name="first_name"
-                                                required="" placeholder="First Name">
+                                                required="" value="{{ old('first_name') }}" placeholder="First Name">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="text" id="last_name" name="last_name"
-                                                required="" placeholder="Last Name">
+                                                required="" value="{{ old('last_name') }}" placeholder="Last Name">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="text" id="email" name="email"
-                                                required="" placeholder="Email">
+                                                required="" value="{{ old('email') }}" placeholder="Email">
                                         </div>
                                     </div>
 
@@ -62,13 +62,13 @@
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="text" id="phone" name="phone"
-                                                required="" placeholder="Phone">
+                                                required="" value="{{ old('phone') }}" placeholder="Phone">
                                         </div>
                                     </div>
 
                                     <div class="input-group" style="margin-bottom: 16px; border-radius: 4px">
                                         <input type="text" class="form-control" id="dob" name="dob"
-                                            required="" placeholder="DOB">
+                                            required="" value="{{ old('dob') }}" placeholder="DOB">
                                         <span class="input-group-addon bg-custom b-0"><i
                                                 class="mdi mdi-calendar text-white"></i></span>
                                     </div>
@@ -88,7 +88,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <input class="form-control" type="text" id="address" name="address"
-                                                required="" placeholder="Address">
+                                                required="" value="{{ old('address') }}" placeholder="Address">
                                         </div>
                                     </div>
 
