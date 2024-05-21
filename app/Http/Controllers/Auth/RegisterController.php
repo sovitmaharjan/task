@@ -16,9 +16,9 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $userInstance = new UserService();
-        $user = $userInstance->create($request->validated());
-        dd($user);
-        // User::create($request->validated());
+        $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+        $userInstance->create($data);
         return redirect()->route('login')->with('success', 'User created successfully');
     }
 }

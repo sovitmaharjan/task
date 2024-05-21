@@ -78,9 +78,9 @@
                                             <select class="form-control" type="text" id="gender" name="gender"
                                                 required="">
                                                 <option value="">Select Gender</option>
-                                                <option value="m">Male</option>
-                                                <option value="f">Female</option>
-                                                <option value="o">Other</option>
+                                                <option value="m" @selected(old('gender') == 'm')>Male</option>
+                                                <option value="f" @selected(old('gender') == 'f')>Female</option>
+                                                <option value="o" @selected(old('gender') == 'o')>Other</option>
                                             </select>
                                         </div>
                                     </div>

@@ -61,9 +61,7 @@ class UserService
         foreach ($this->columns as $item) {
             $valuePlaceholders .= $valuePlaceholders == '' ? '?' : ', ?';
             if (array_key_exists($item, $data)) {
-                // temp test
-                $values[] = $item == 'email' ? $data[$item] . Str::random(9) : $data[$item];
-                // $values[] = $data[$item];
+                $values[] = $data[$item];
             } else {
                 $values[] = $item == 'created_at' || $item == 'updated_at' ? date('Y-m-d H:i:s') : '';
             }
