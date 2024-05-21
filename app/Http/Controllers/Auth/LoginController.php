@@ -15,14 +15,14 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         if (!auth()->attempt($request->validated())) {
-            return back()->with('error', 'Invalid credentials');;
+            return back()->with('error', 'Invalid credentials.');;
         }
-        return redirect()->route('dashboard')->with('success', 'Login successful');
+        return redirect()->route('dashboard')->with('success', 'Login successful.');
     }
 
     public function logout()
     {
         auth()->logout();
-        return redirect('login')->with('success', 'Logout successful');
+        return redirect('login')->with('success', 'Logout successful.');
     }
 }

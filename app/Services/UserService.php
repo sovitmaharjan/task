@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class UserService
 {
     protected $columns = [
+        'id',
         'first_name',
         'last_name',
         'email',
@@ -55,6 +56,7 @@ class UserService
 
     public function create($data)
     {
+        unset($this->columns[0]);
         $valuePlaceholders = implode(', ', array_fill(0, count($this->columns), '?'));
         $values = [];
         $valuePlaceholders = '';
@@ -66,7 +68,6 @@ class UserService
                 $values[] = $item == 'created_at' || $item == 'updated_at' ? date('Y-m-d H:i:s') : '';
             }
         }
-
         $columns = implode(', ', $this->columns);
         $statement = $this->pdo->prepare("INSERT INTO $this->table ($columns) VALUES($valuePlaceholders)");
         $statement->execute($values);

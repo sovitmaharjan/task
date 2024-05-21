@@ -19,6 +19,6 @@ class RegisterController extends Controller
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $userInstance->create($data);
-        return redirect()->route('login')->with('success', 'User created successfully');
+        return redirect()->route('login')->with('success', 'User created successfully.');
     }
 }
