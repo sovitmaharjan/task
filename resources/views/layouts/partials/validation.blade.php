@@ -1,7 +1,6 @@
 <script>
     var validationErrors = @json($errors->getMessages());
     $.each(validationErrors, function(i, e) {
-        console.log(e);
         $(`#${i}`).css({
             "border": "1px solid #f1416c"
         });

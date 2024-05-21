@@ -36,7 +36,7 @@ class UserService
         $this->visibleColumns = array_diff($this->columns, $this->hidden ?? []);
     }
 
-    public function fetchAll()
+    public function readAll()
     {
         $columns = implode(', ', $this->visibleColumns);
         $statement = $this->pdo->prepare("SELECT $columns FROM $this->table");
@@ -45,19 +45,21 @@ class UserService
         return $result;
     }
 
-    public function fetch($identifier)
+    public function read($id)
     {
         $columns = implode(', ', $this->visibleColumns);
         $statement = $this->pdo->prepare("SELECT $columns FROM $this->table WHERE id = ?");
-        $statement->execute([$identifier]);
+        $statement->execute([$id]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 
     public function create($data)
     {
-        unset($this->columns[0]);
-        $valuePlaceholders = implode(', ', array_fill(0, count($this->columns), '?'));
+        $key = array_search('id', $this->columns);
+        if ($key != false) {
+            unset($this->columns[$key]);
+        }
         $values = [];
         $valuePlaceholders = '';
         foreach ($this->columns as $item) {
@@ -70,9 +72,27 @@ class UserService
         }
         $columns = implode(', ', $this->columns);
         $statement = $this->pdo->prepare("INSERT INTO $this->table ($columns) VALUES($valuePlaceholders)");
-        $statement->execute($values);
+        return $statement->execute($values);
+    }
 
-        return $this->fetch($this->pdo->lastInsertId());
+    public function update($id, $data)
+    {
+        $values = [];
+        $placeholders = '';
+        foreach ($data as $key => $value) {
+            if (in_array($key, $this->columns)) {
+                $placeholders .= $placeholders == '' ? "$key = ?" : ", $key = ?";
+                $values[] = $value;
+            }
+        }
+        $statement = $this->pdo->prepare("UPDATE $this->table SET $placeholders WHERE id = ?");
+        return $statement->execute(array_merge($values, [$id]));
+    }
+
+    public function delete($id)
+    {
+        $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE id = ?");
+        return $statement->execute([$id]);
     }
 
     public function sqlResult($sql, $type = 1)

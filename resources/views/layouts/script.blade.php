@@ -15,6 +15,7 @@
 
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/js/jquery.core.js') }}"></script>
@@ -43,6 +44,39 @@
         format: 'yyyy-mm-dd',
         autoclose: true
     });
+
+    $(document).on('click', '.delete', function() {
+        var id = $(this).data('id');
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4fa7f3',
+            cancelButtonColor: '#d57171',
+            confirmButtonText: 'Yes, delete it!'
+        }, function(isConfirm) {
+            if (isConfirm) {
+                var url = "{{ route('user.destroy', ':id') }}";
+                url = url.replace(":id", id);
+                var form = $('<form></form>');
+                form.attr('method', 'POST');
+                form.attr('action', url);
+                form.append($('<input>').attr({
+                    type: 'hidden',
+                    name: '_token',
+                    value: $('meta[name="csrf-token"]').attr('content')
+                }));
+                form.append($('<input>').attr({
+                    type: 'hidden',
+                    name: '_method',
+                    value: 'DELETE'
+                }))
+                $('body').append(form);
+                form.submit();
+            }
+        })
+    })
 </script>
 
 @include('layouts.partials.session-message')

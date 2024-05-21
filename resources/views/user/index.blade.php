@@ -36,11 +36,11 @@
                                         <td>{{ date_format(date_create($value['dob']), 'Y-m-d') }}</td>
                                         <td>
                                             @php
-                                                echo match($value['gender']) {
+                                                echo match ($value['gender']) {
                                                     'm' => 'Male',
                                                     'f' => 'Female',
                                                     'o' => 'Other',
-                                                }       
+                                                };
                                             @endphp
                                         </td>
                                         <td>{{ $value['address'] }}</td>
@@ -48,8 +48,10 @@
                                             <a href="{{ route('user.edit', $value['id']) }}"
                                                 class="btn btn-warning waves-effect btn-default m-b-5"> <i
                                                     class="fa fa-pencil"></i> </a>
-                                            <button class="btn btn-danger waves-effect btn-default m-b-5"> <i
-                                                    class="fa fa-trash"></i> </button>
+                                            @if (auth()->id() != $value['id'])
+                                                <button class="btn btn-danger waves-effect btn-default m-b-5 delete"
+                                                    data-id="{{ $value['id'] }}"> <i class="fa fa-trash"></i> </button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
