@@ -13,6 +13,7 @@
 <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
 
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/js/jquery.core.js') }}"></script>
@@ -35,7 +36,12 @@
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-    }
+    };
+
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true
+    });
 </script>
 
 @include('layouts.partials.session-message')

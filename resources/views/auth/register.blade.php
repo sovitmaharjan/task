@@ -1,9 +1,6 @@
 @extends('layouts.auth.master')
 
 @section('content')
-    @push('style')
-        <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-    @endpush
 
     <section>
         <div class="container-alt">
@@ -67,7 +64,7 @@
                                     </div>
 
                                     <div class="input-group" style="margin-bottom: 16px; border-radius: 4px">
-                                        <input type="text" class="form-control" id="dob" name="dob"
+                                        <input type="text" class="form-control datepicker" id="dob" name="dob"
                                             required="" value="{{ old('dob') }}" placeholder="DOB">
                                         <span class="input-group-addon bg-custom b-0"><i
                                                 class="mdi mdi-calendar text-white"></i></span>
@@ -124,12 +121,4 @@
     </section>
     <!-- END HOME -->
 
-    @push('script')
-        <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-        <script>
-            $('#dob').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-        </script>
-    @endpush
 @endsection
