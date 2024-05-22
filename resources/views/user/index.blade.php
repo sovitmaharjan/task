@@ -208,8 +208,7 @@
 @push('script')
     <script>
         $(document).on('change', '#entries', function() {
-            var entries = $(this).val();
-            window.location.href='{{ route("user.index") }}' + '?page=1&entries=' + entries
+            window.location.href='{{ route("user.index") }}' + '?page=1&entries=' + $(this).val()
         });
     </script>
 @endpush
