@@ -24,14 +24,7 @@ class MusicUpdateRequest extends FormRequest
     {
         return [
             'artist_id' => 'required|exists:artists,id',
-            'title' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('music', 'title')
-                    ->where('artist_id', request()->artist_id)
-                    ->ignore($this->route('music')),
-            ],
+            'title' => 'required|string|max:255',
             'album_name' => 'required|string|max:255',
             'genre' => 'required|string|in:rnb,country,classic,rock,jazz',
         ];
