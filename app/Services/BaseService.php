@@ -6,14 +6,13 @@ use PDO;
 
 class BaseService
 {
-    protected $table, $columns, $hidden, $pdo, $visibleColumns;
+    protected $table, $columns, $hidden, $visibleColumns;
 
     public function __construct($table, $columns, $hidden = [])
     {
         $this->table = $table;
         $this->columns = $columns;
         $this->hidden = $hidden;
-        $this->pdo = app('pdo');
         $this->visibleColumns = array_diff($this->columns, $this->hidden ?? []);
     }
 
@@ -24,25 +23,21 @@ class BaseService
         $entries = request()->entries ?? 10;
         $page = request()->page ?? 1;
         $offset = ($entries * $page) - $entries;
-        $total = $this->sqlResult("SELECT count(*) FROM $this->table", 3);
+        $total = pdo("SELECT count(*) FROM $this->table", [], 3);
 
-        $statement = $this->pdo->prepare("SELECT $columns FROM $this->table LIMIT $entries OFFSET $offset");
+        $data[$this->table] = pdo("SELECT $columns FROM $this->table LIMIT $entries OFFSET $offset", [], 2);
         $data['total'] = $total;
         $data['currentPage'] = $page;
         $calc = $total / $entries;
         $data['lastPage'] = is_float($calc) ? (int) $calc + 1 : $calc;
         $data['entries'] = $entries;
-        $statement->execute();
-        $data[$this->table] = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
     public function read($id)
     {
         $columns = implode(', ', $this->visibleColumns);
-        $statement = $this->pdo->prepare("SELECT $columns FROM $this->table WHERE id = ?");
-        $statement->execute([$id]);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return pdo("SELECT $columns FROM $this->table WHERE id = ?", [$id], 1);
     }
 
     public function create($data)
@@ -62,9 +57,8 @@ class BaseService
             }
         }
         $columns = implode(', ', $this->columns);
-        $statement = $this->pdo->prepare("INSERT INTO $this->table ($columns) VALUES($valuePlaceholders)");
-        return $statement->execute($values);
-    }
+        return pdo("INSERT INTO $this->table ($columns) VALUES($valuePlaceholders)", $values);
+    }   
 
     public function update($id, $data)
     {
@@ -76,24 +70,11 @@ class BaseService
                 $values[] = $value;
             }
         }
-        $statement = $this->pdo->prepare("UPDATE $this->table SET $placeholders WHERE id = ?");
-        return $statement->execute(array_merge($values, [$id]));
+        return pdo("UPDATE $this->table SET $placeholders WHERE id = ?", array_merge($values, [$id]));
     }
 
     public function delete($id)
     {
-        $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE id = ?");
-        return $statement->execute([$id]);
-    }
-
-    public function sqlResult($sql, $type = 1)
-    {
-        $statement = $this->pdo->query($sql);
-        $statement->execute();
-        return match ($type) {
-            1 => $statement->fetch(PDO::FETCH_ASSOC),
-            2 => $statement->fetchAll(PDO::FETCH_ASSOC),
-            3 => $statement->fetchColumn(),
-        };
+        return pdo("DELETE FROM $this->table WHERE id = ?", [$id]);
     }
 }

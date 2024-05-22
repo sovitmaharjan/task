@@ -25,8 +25,8 @@ class UserFactory extends Factory
     {
         $gender = ['m', 'f', 'o'];
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'dob' => fake()->date(),

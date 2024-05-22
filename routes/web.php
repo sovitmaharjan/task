@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MusicController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
@@ -9,10 +10,16 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/user', UserController::class);
-    Route::resource('/artist', ArtistController::class);
+
+    Route::resource('/user', UserController::class)->except('show');
+
+    Route::resource('/artist', ArtistController::class)->except('show');
     Route::get('/artist-export', [ArtistController::class, 'export'])->name('artist.export');
     Route::post('/artist-import', [ArtistController::class, 'import'])->name('artist.import');
+
+    Route::resource('music', MusicController::class)->except('index', 'create', 'show');
+    Route::get('/music/{artist_id}', [MusicController::class, 'index'])->name('music.index');
+    Route::get('/music/create/{artist_id}', [MusicController::class, 'create'])->name('music.create');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

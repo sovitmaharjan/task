@@ -27,8 +27,6 @@ class UserService extends BaseService
 
     protected $table = 'users';
 
-    protected $pdo, $visibleColumns;
-
     public function __construct()
     {
         parent::__construct(

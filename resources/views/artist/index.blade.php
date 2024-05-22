@@ -29,7 +29,8 @@
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="post" action="{{ route('artist.import') }}" enctype="multipart/form-data">
+                                    <form method="post" action="{{ route('artist.import') }}"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"
@@ -45,7 +46,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default waves-effect"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Import</button>
+                                            <button type="submit"
+                                                class="btn btn-primary waves-effect waves-light">Import</button>
                                         </div>
                                     </form>
                                 </div><!-- /.modal-content -->
@@ -58,10 +60,18 @@
                                         <div class="form-group m-r-10">
                                             <label>Show</label>
                                             <select class="form-control" id="entries">
-                                                <option value="10" @selected($entries == 10)>10</option>
-                                                <option value="25" @selected($entries == 25)>25</option>
-                                                <option value="50" @selected($entries == 50)>50</option>
-                                                <option value="100" @selected($entries == 100)>100</option>
+                                                <option value="10" @selected($entries == 10)
+                                                    data-url="{{ route('artist.index', ['entries' => 10, 'page' => 1]) }}">
+                                                    10</option>
+                                                <option value="25" @selected($entries == 25)
+                                                    data-url="{{ route('artist.index', ['entries' => 25, 'page' => 1]) }}">
+                                                    25</option>
+                                                <option value="50" @selected($entries == 50)
+                                                    data-url="{{ route('artist.index', ['entries' => 50, 'page' => 1]) }}">
+                                                    50</option>
+                                                <option value="100" @selected($entries == 100)
+                                                    data-url="{{ route('artist.index', ['entries' => 100, 'page' => 1]) }}">
+                                                    100</option>
                                             </select>
                                             <label>Entries</label>
                                         </div>
@@ -111,6 +121,9 @@
                                             <td>{{ $value['first_release_year'] }}</td>
                                             <td>{{ $value['no_of_album_released'] }}</td>
                                             <td>
+                                                <a href="{{ route('music.index', $value['id']) }}"
+                                                    class="btn btn-primary waves-effect btn-default m-b-5"> <i
+                                                        class="fa fa-music"></i> </a>
                                                 <a href="{{ route('artist.edit', $value['id']) }}"
                                                     class="btn btn-warning waves-effect btn-default m-b-5"> <i
                                                         class="fa fa-pencil"></i> </a>
@@ -142,14 +155,14 @@
                                             </li>
                                         @else
                                             <li class="prev"><a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage - 1 }}"><i
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage - 1]) }}"><i
                                                         class="fa fa-angle-left"></i></a>
                                             </li>
                                         @endif
                                         @if ($currentPage - 1 != 1)
                                             <li class="{{ $currentPage == 1 ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . 1 }}">{{ 1 }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => 1]) }}">{{ 1 }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage - 2 >= 2)
@@ -160,31 +173,31 @@
                                         @if ($currentPage == $lastPage)
                                             <li class="{{ $currentPage == $currentPage - 2 ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage - 2 }}">{{ $currentPage - 2 }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage - 2]) }}">{{ $currentPage - 2 }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage > 1)
                                             <li class="{{ $currentPage == $currentPage - 1 ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage - 1 }}">{{ $currentPage - 1 }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage - 1]) }}">{{ $currentPage - 1 }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage != 1)
                                             <li class="{{ $currentPage == $currentPage ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage }}">{{ $currentPage }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage]) }}">{{ $currentPage }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage < $lastPage)
                                             <li class="{{ $currentPage == $currentPage + 1 ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage + 1 }}">{{ $currentPage + 1 }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage + 1]) }}">{{ $currentPage + 1 }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage == 1)
                                             <li class="{{ $currentPage == $currentPage + 2 ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage + 2 }}">{{ $currentPage + 2 }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage + 2]) }}">{{ $currentPage + 2 }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage + 2 <= $lastPage - 1)
@@ -195,7 +208,7 @@
                                         @if ($currentPage + 1 < $lastPage)
                                             <li class="{{ $currentPage == $lastPage ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $lastPage }}">{{ $lastPage }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $lastPage]) }}">{{ $lastPage }}</a>
                                             </li>
                                         @endif
                                         @if ($currentPage == $lastPage)
@@ -204,7 +217,7 @@
                                             </li>
                                         @else
                                             <li class="next"><a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage + 1 }}"><i
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage + 1]) }}"><i
                                                         class="fa fa-angle-right"></i></a>
                                             </li>
                                         @endif
@@ -215,14 +228,14 @@
                                             </li>
                                         @else
                                             <li class="prev"><a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage - 1 }}"><i
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage - 1]) }}"><i
                                                         class="fa fa-angle-left"></i></a>
                                             </li>
                                         @endif
                                         @for ($i = 1; $i <= $lastPage; $i++)
                                             <li class="{{ $currentPage == $i ? 'active' : '' }}">
                                                 <a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $i }}">{{ $i }}</a>
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $i]) }}">{{ $i }}</a>
                                             </li>
                                         @endfor
                                         @if ($currentPage == $lastPage)
@@ -231,7 +244,7 @@
                                             </li>
                                         @else
                                             <li class="next"><a
-                                                    href="{{ route('artist.index') . '?entries=' . $entries . '&page=' . $currentPage + 1 }}"><i
+                                                    href="{{ route('artist.index', ['entries' => $entries, 'page' => $currentPage + 1]) }}"><i
                                                         class="fa fa-angle-right"></i></a>
                                             </li>
                                         @endif
@@ -246,11 +259,3 @@
         </div> <!-- end col -->
     </div>
 @endsection
-
-@push('script')
-    <script>
-        $(document).on('change', '#entries', function() {
-            window.location.href = '{{ route('artist.index') }}' + '?entries=' + $(this).val() + '&page=1'
-        });
-    </script>
-@endpush

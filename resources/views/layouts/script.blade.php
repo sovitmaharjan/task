@@ -74,7 +74,11 @@
                 form.submit();
             }
         })
-    })
+    });
+
+    $(document).on('change', '#entries', function() {
+        window.location.href = $(this).find('option:selected').data('url');
+    });
 </script>
 
 @include('layouts.partials.session-message')

@@ -8,43 +8,36 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card-box">
-                <h4 class="m-t-0 header-title"><b>Basic example</b></h4>
-                <p class="text-muted m-b-30 font-13">
-                    Individual form controls automatically receive some global styling. All textual
-                    <code>&lt;input&gt;</code>,
-                    <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code> elements with
-                    <code>.form-control</code> are set to
-                    <code>width: 100%;</code> by default. Wrap labels and controls in <code>.form-group</code> for
-                    optimum spacing.
+                <p class="m-t-0 m-b-30 header-title"><b>Fields with asterisk(<span class="text-danger">*</span>) are required.</b>
                 </p>
                 <form method="post" action="{{ route('user.update', $user['id']) }}">
                     @csrf
                     @method('patch')
                     <div class="form-group">
-                        <label for="first_name">First Names</label>
+                        <label for="first_name">First Name <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="first_name" name="first_name" required=""
                             value="{{ old('first_name', $user['first_name']) }}" placeholder="First Name">
                     </div>
 
                     <div class="form-group">
-                        <label for="last_name">Last Names</label>
+                        <label for="last_name">Last Name <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="last_name" name="last_name" required=""
                             value="{{ old('last_name', $user['last_name']) }}" placeholder="Last Name">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="email" name="email" required=""
                             value="{{ old('email', $user['email']) }}" placeholder="Email">
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="phone" name="phone" required=""
                             value="{{ old('phone', $user['phone']) }}" placeholder="Phone">
                     </div>
 
-                    <label for="dob">DOB</label>
+                    <label for="dob">DOB <span class="text-danger">*</span></label>
                     <div class="input-group" style="margin-bottom: 16px; border-radius: 4px">
                         <input type="text" class="form-control datepicker" id="dob" name="dob" required=""
                             value="{{ old('dob', date_format(date_create($user['dob']), 'Y-m-d')) }}" placeholder="1992-01-01">
@@ -52,7 +45,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="gender">Gender</label>
+                        <label for="gender">Gender <span class="text-danger">*</span></label>
                         <select class="form-control" type="text" id="gender" name="gender" required="">
                             <option value="">Select Gender</option>
                             <option value="m" @selected(old('gender') == 'm' || $user['gender'] == 'm')>Male</option>
@@ -62,7 +55,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="address">Address</label>
+                        <label for="address">Address <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="address" name="address" required=""
                             value="{{ old('address', $user['address']) }}" placeholder="Address">
                     </div>

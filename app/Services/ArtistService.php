@@ -43,7 +43,7 @@ class ArtistService extends BaseService
             $char++;
         }
         $columns = implode(', ', $this->visibleColumns);
-        $artists = $this->sqlResult("SELECT $columns from $this->table", 2);
+        $artists = pdo("SELECT $columns from $this->table", [], 2);
 
         $row = 2;
         foreach ($artists as $artist) {
