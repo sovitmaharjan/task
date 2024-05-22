@@ -1,5 +1,6 @@
 Because of my wrong bash script, all of my commit names were set as "commit_name"
 
+```
 function gcom() {
     if [ -n "$1" ]; then
         # -n checks if $1 is not empty
