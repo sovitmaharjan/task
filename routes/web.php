@@ -29,5 +29,3 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.index');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// commit alias test 3
