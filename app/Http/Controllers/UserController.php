@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data['users'] = $this->userService->readAll();
+        $data = $this->userService->readAll();
         return view('user.index', $data)->with('success', 'Users.');
     }
 
