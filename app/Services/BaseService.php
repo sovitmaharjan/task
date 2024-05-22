@@ -20,19 +20,6 @@ class BaseService
     public function readAll()
     {
         $columns = implode(', ', $this->visibleColumns);
-        // if(request()->entries || request()->page) {
-        //     $entries = request()->entries ?? 10;
-        //     $page = request()->page ?? 1;
-        //     $offset = ($entries * $page) - $entries;
-        // }
-        // if (!isset($offset)){
-        //     $statement = $this->pdo->prepare("SELECT $columns FROM $this->table");
-        // } else {
-        //     $statement = $this->pdo->prepare("SELECT $columns FROM $this->table LIMIT $entries OFFSET $offset");
-        //     $data['total'] = $this->sqlResult("SELECT count(*) FROM $this->table", 3);
-        //     $data['page'] = $page;
-        //     $data['entries'] = $entries;
-        // }
 
         $entries = request()->entries ?? 10;
         $page = request()->page ?? 1;
