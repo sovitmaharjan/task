@@ -46,7 +46,7 @@
     });
 
     $(document).on('click', '.delete', function() {
-        var id = $(this).data('id');
+        var route = $(this).data('route');
         swal({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -57,11 +57,9 @@
             confirmButtonText: 'Yes, delete it!'
         }, function(isConfirm) {
             if (isConfirm) {
-                var url = "{{ route('user.destroy', ':id') }}";
-                url = url.replace(":id", id);
                 var form = $('<form></form>');
                 form.attr('method', 'POST');
-                form.attr('action', url);
+                form.attr('action', route);
                 form.append($('<input>').attr({
                     type: 'hidden',
                     name: '_token',

@@ -65,7 +65,7 @@
 
                                     <div class="input-group" style="margin-bottom: 16px; border-radius: 4px">
                                         <input type="text" class="form-control datepicker" id="dob" name="dob"
-                                            required="" value="{{ old('dob') }}" placeholder="DOB">
+                                            required="" value="{{ old('dob') }}" placeholder="1992-01-01">
                                         <span class="input-group-addon bg-custom b-0"><i
                                                 class="mdi mdi-calendar text-white"></i></span>
                                     </div>

@@ -26,8 +26,8 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-star-variant"></i>
                         <span> Artist </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">Add</a></li>
+                        <li><a href="{{ route('artist.index') }}">List</a></li>
+                        <li><a href="{{ route('artist.create') }}">Add</a></li>
                     </ul>
                 </li>
 

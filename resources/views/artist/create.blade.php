@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page', 'Add')
-@section('group', 'User')
+@section('group', 'Artist')
 
 @section('content')
 
@@ -17,30 +17,12 @@
                     <code>width: 100%;</code> by default. Wrap labels and controls in <code>.form-group</code> for
                     optimum spacing.
                 </p>
-                <form method="post" action="{{ route('user.store') }}">
+                <form method="post" action="{{ route('artist.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="first_name">First Names</label>
-                        <input class="form-control" type="text" id="first_name" name="first_name" required=""
-                            value="{{ old('first_name') }}" placeholder="First Name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="last_name">Last Names</label>
-                        <input class="form-control" type="text" id="last_name" name="last_name" required=""
-                            value="{{ old('last_name') }}" placeholder="Last Name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input class="form-control" type="text" id="email" name="email" required=""
-                            value="{{ old('email') }}" placeholder="Email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input class="form-control" type="text" id="phone" name="phone" required=""
-                            value="{{ old('phone') }}" placeholder="Phone">
+                        <label for="name">Names</label>
+                        <input class="form-control" type="text" id="name" name="name" required=""
+                            value="{{ old('name') }}" placeholder="Name">
                     </div>
 
                     <label for="dob">DOB</label>
@@ -65,10 +47,22 @@
                         <input class="form-control" type="text" id="address" name="address" required=""
                             value="{{ old('address') }}" placeholder="Address">
                     </div>
-                    
+
+                    <div class="form-group">
+                        <label for="first_release_year">First Release Year</label>
+                        <input class="form-control" type="text" id="first_release_year" name="first_release_year" required=""
+                            value="{{ old('first_release_year') }}" placeholder="1992">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="no_of_album_released">No. of Albums</label>
+                        <input class="form-control" type="text" id="no_of_album_released" name="no_of_album_released" required=""
+                            value="{{ old('no_of_album_released') }}" placeholder="9">
+                    </div>
+
                     <div class="form-group m-t-20">
                         <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
-                        <a href="{{ route('user.index') }}" class="btn btn-danger waves-effect waves-light">Cancel</a>
+                        <a href="{{ route('artist.index') }}" class="btn btn-danger waves-effect waves-light">Cancel</a>
                     </div>
                 </form>
                 <!-- end row -->

@@ -19,7 +19,7 @@
                 </p>
                 <form method="post" action="{{ route('user.update', $user['id']) }}">
                     @csrf
-                    @method('put')
+                    @method('patch')
                     <div class="form-group">
                         <label for="first_name">First Names</label>
                         <input class="form-control" type="text" id="first_name" name="first_name" required=""
@@ -47,7 +47,7 @@
                     <label for="dob">DOB</label>
                     <div class="input-group" style="margin-bottom: 16px; border-radius: 4px">
                         <input type="text" class="form-control datepicker" id="dob" name="dob" required=""
-                            value="{{ old('dob', $user['dob']) }}" placeholder="DOB">
+                            value="{{ old('dob', date_format(date_create($user['dob']), 'Y-m-d')) }}" placeholder="1992-01-01">
                         <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
                     </div>
 
@@ -66,6 +66,7 @@
                         <input class="form-control" type="text" id="address" name="address" required=""
                             value="{{ old('address', $user['address']) }}" placeholder="Address">
                     </div>
+                    
                     <div class="form-group m-t-20">
                         <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
                         <a href="{{ route('user.index') }}" class="btn btn-danger waves-effect waves-light">Cancel</a>
