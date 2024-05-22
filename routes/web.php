@@ -30,4 +30,4 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// commit alias test 5
+// commit alias test 6
