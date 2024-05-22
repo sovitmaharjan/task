@@ -11,6 +11,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/user', UserController::class);
     Route::resource('/artist', ArtistController::class);
+    Route::get('/artist-export', [ArtistController::class, 'export'])->name('artist.export');
+    Route::post('/artist-import', [ArtistController::class, 'import'])->name('artist.import');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
